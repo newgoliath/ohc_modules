@@ -1,0 +1,847 @@
+1
+00:00:00,000 --> 00:00:02,025
+Okay, so we're going to dive into
+
+2
+00:00:02,025 --> 00:00:04,605
+installation of the OpenShift Container Platform.
+
+3
+00:00:04,605 --> 00:00:06,645
+As I mentioned, we're going to start with
+
+4
+00:00:06,645 --> 00:00:09,540
+a with a user provisioned infrastructure.
+
+5
+00:00:09,540 --> 00:00:10,140
+Then we'll go through
+
+6
+00:00:10,140 --> 00:00:11,940
+an installer provisioned infrastructure from
+
+7
+00:00:11,940 --> 00:00:14,865
+ACM and then in later demonstrations we'l get into the manage services.
+
+8
+00:00:14,865 --> 00:00:17,520
+Before we dive in, I do want to point out we do
+
+9
+00:00:17,520 --> 00:00:20,400
+have full stack automation using IPI and the left,
+
+10
+00:00:20,400 --> 00:00:21,540
+which is kind of an
+
+11
+00:00:21,540 --> 00:00:24,000
+opinionated best practices
+for cluster provisioning.
+
+12
+00:00:24,000 --> 00:00:26,340
+Although majority of our
+installation is actually
+
+13
+00:00:26,340 --> 00:00:28,500
+still follow a preexisting
+infrastructure.
+
+14
+00:00:28,500 --> 00:00:29,790
+You know, when you get
+into a data center
+
+15
+00:00:29,790 --> 00:00:31,020
+and there's a lot of existing,
+
+16
+00:00:31,020 --> 00:00:34,225
+very heterogeneous
+infrastructure, hardware,
+
+17
+00:00:34,225 --> 00:00:35,510
+networking and those sorts of
+
+18
+00:00:35,510 --> 00:00:36,740
+things that need
+to be supported.
+
+19
+00:00:36,740 --> 00:00:39,380
+And so we need to meet customers
+where they are today in
+
+20
+00:00:39,380 --> 00:00:40,910
+their infrastructure
+and be able to
+
+21
+00:00:40,910 --> 00:00:43,070
+support that with user
+provision infrastructure.
+
+22
+00:00:43,070 --> 00:00:45,260
+And then you could see all
+those offerings on the right.
+
+23
+00:00:45,260 --> 00:00:48,230
+So with that, let
+me stop sharing
+
+24
+00:00:48,230 --> 00:00:52,025
+that screen and go over
+to the installation.
+
+25
+00:00:52,025 --> 00:00:55,970
+So we're going to start
+where most of our sysadmins,
+
+26
+00:00:55,970 --> 00:00:58,610
+an OpenShift admins
+will be familiar with,
+
+27
+00:00:58,610 --> 00:01:00,545
+and that is at the command line.
+
+28
+00:01:00,545 --> 00:01:03,350
+So I have a environment here,
+
+29
+00:01:03,350 --> 00:01:05,885
+a Linux shell that I'm at.
+
+30
+00:01:05,885 --> 00:01:07,280
+I want to show you
+what it looks like
+
+31
+00:01:07,280 --> 00:01:08,330
+to actually deploy via
+
+32
+00:01:08,330 --> 00:01:11,615
+API, user provision
+infrastructure.
+
+33
+00:01:11,615 --> 00:01:12,950
+You're gonna notice
+a few things.
+
+34
+00:01:12,950 --> 00:01:15,545
+I have them install config
+dot YAML file here.
+
+35
+00:01:15,545 --> 00:01:18,140
+This is really the majority
+
+36
+00:01:18,140 --> 00:01:21,695
+of what the inflation
+gets powered off of.
+
+37
+00:01:21,695 --> 00:01:25,040
+So this install config YAML
+file had some details in it.
+
+38
+00:01:25,040 --> 00:01:27,035
+This is probably the
+most challenging part.
+
+39
+00:01:27,035 --> 00:01:28,490
+Setup is this install config
+
+40
+00:01:28,490 --> 00:01:30,140
+YAML file and get it correct.
+
+41
+00:01:30,140 --> 00:01:31,520
+Because you need to talk to
+
+42
+00:01:31,520 --> 00:01:33,665
+various teams like
+you're this case,
+
+43
+00:01:33,665 --> 00:01:35,330
+since we're deploying on
+B sphere, you're obese,
+
+44
+00:01:35,330 --> 00:01:38,045
+your administrators,
+your networking team,
+
+45
+00:01:38,045 --> 00:01:39,860
+your DNS team, and so on to
+
+46
+00:01:39,860 --> 00:01:42,740
+understand and coordinate
+with them what
+
+47
+00:01:42,740 --> 00:01:44,330
+you can use inside
+those environments to
+
+48
+00:01:44,330 --> 00:01:47,525
+deploy your OpenShift cluster.
+
+49
+00:01:47,525 --> 00:01:48,860
+So once I have that installed
+
+50
+00:01:48,860 --> 00:01:51,140
+config, it's pretty
+straightforward.
+
+51
+00:01:51,140 --> 00:01:53,000
+I could basically, there's
+a couple of commands.
+
+52
+00:01:53,000 --> 00:01:56,165
+One is I'm just going
+to run the OpenShift,
+
+53
+00:01:56,165 --> 00:01:59,045
+install, create
+ignition configs.
+
+54
+00:01:59,045 --> 00:02:02,915
+And what that will do screen.
+
+55
+00:02:02,915 --> 00:02:06,710
+It will have created
+some ignition biology.
+
+56
+00:02:06,710 --> 00:02:07,880
+See a master admission file at
+
+57
+00:02:07,880 --> 00:02:09,875
+Bootstrap and worker
+admission file.
+
+58
+00:02:09,875 --> 00:02:12,620
+These ignition files are
+going to get appended to
+
+59
+00:02:12,620 --> 00:02:14,390
+the config of the
+virtual machines
+
+60
+00:02:14,390 --> 00:02:16,655
+on vSphere so that when
+they're powered on,
+
+61
+00:02:16,655 --> 00:02:18,140
+they take over and actually
+
+62
+00:02:18,140 --> 00:02:19,640
+feed the information
+necessary to
+
+63
+00:02:19,640 --> 00:02:22,490
+those machines to be
+installed properly,
+
+64
+00:02:22,490 --> 00:02:24,140
+to be part of this cluster.
+
+65
+00:02:24,140 --> 00:02:26,750
+So from there, I've
+actually written a couple
+
+66
+00:02:26,750 --> 00:02:28,010
+of scripts to make
+this a little easier
+
+67
+00:02:28,010 --> 00:02:29,300
+rather than clicking around,
+
+68
+00:02:29,300 --> 00:02:32,210
+I have a set VM
+config dot SH script.
+
+69
+00:02:32,210 --> 00:02:34,160
+All that script does is
+
+70
+00:02:34,160 --> 00:02:36,245
+use a small client
+called me go VC,
+
+71
+00:02:36,245 --> 00:02:40,260
+which is a very popular
+Go binary based.
+
+72
+00:02:41,320 --> 00:02:44,180
+These your client,
+basically it interacts
+
+73
+00:02:44,180 --> 00:02:47,030
+the vSphere API to manipulate
+your vSphere environment.
+
+74
+00:02:47,030 --> 00:02:51,575
+So I go here and
+run, set the config.
+
+75
+00:02:51,575 --> 00:02:53,450
+That's going to do
+is it's gonna go,
+
+76
+00:02:53,450 --> 00:02:56,000
+you'll see it's actually
+printing out what you have here.
+
+77
+00:02:56,000 --> 00:02:57,050
+So it's basically taking
+
+78
+00:02:57,050 --> 00:02:59,915
+that ignition file
+and adding it to
+
+79
+00:02:59,915 --> 00:03:02,240
+each VM so that the VM is set
+
+80
+00:03:02,240 --> 00:03:05,585
+up for to boot from
+that ignition file.
+
+81
+00:03:05,585 --> 00:03:07,760
+Then I'm gonna run the
+power on shell command.
+
+82
+00:03:07,760 --> 00:03:09,770
+Again, just using Vigo B2C
+
+83
+00:03:09,770 --> 00:03:11,150
+client reach out to beads here,
+
+84
+00:03:11,150 --> 00:03:15,455
+Empower on the machines. So
+we'll go ahead and do that.
+
+85
+00:03:15,455 --> 00:03:18,260
+The nice thing is,
+once this is done,
+
+86
+00:03:18,260 --> 00:03:20,075
+once I've set this VM config
+
+87
+00:03:20,075 --> 00:03:22,415
+and power them on from there.
+
+88
+00:03:22,415 --> 00:03:24,335
+All I do is really just wait.
+
+89
+00:03:24,335 --> 00:03:25,880
+So I'm going to go ahead
+
+90
+00:03:25,880 --> 00:03:27,490
+and run this
+OpenShift installed.
+
+91
+00:03:27,490 --> 00:03:29,135
+Wait for Bootstrap to complete,
+
+92
+00:03:29,135 --> 00:03:31,970
+and this'll just wait until
+that API is available.
+
+93
+00:03:31,970 --> 00:03:34,565
+It takes roughly 20 minutes
+for this to complete.
+
+94
+00:03:34,565 --> 00:03:36,950
+So in this other window here,
+
+95
+00:03:36,950 --> 00:03:39,080
+you can see what this
+output will look
+
+96
+00:03:39,080 --> 00:03:41,105
+like once the
+installation is complete.
+
+97
+00:03:41,105 --> 00:03:42,800
+So you can see here,
+
+98
+00:03:42,800 --> 00:03:44,810
+if I go to open this up,
+
+99
+00:03:44,810 --> 00:03:47,610
+I open this URL.
+
+100
+00:03:49,810 --> 00:03:52,805
+It's going to take me
+right into the cluster.
+
+101
+00:03:52,805 --> 00:03:55,130
+And you can see,
+
+102
+00:03:55,130 --> 00:03:57,605
+you can see if I go to the
+administrator persona,
+
+103
+00:03:57,605 --> 00:03:59,615
+this cluster is now running,
+
+104
+00:03:59,615 --> 00:04:02,750
+was deployed by a user
+provision infrastructure.
+
+105
+00:04:02,750 --> 00:04:04,205
+Now to make this a hub cluster,
+
+106
+00:04:04,205 --> 00:04:05,465
+as we were showing in our demo,
+
+107
+00:04:05,465 --> 00:04:06,590
+we want to make
+this hub cluster so
+
+108
+00:04:06,590 --> 00:04:09,199
+we can deploy subsequent.
+
+109
+00:04:09,199 --> 00:04:12,170
+We can deploy subsequent
+clusters using
+
+110
+00:04:12,170 --> 00:04:15,020
+ACM by IPI makes it much easier.
+
+111
+00:04:15,020 --> 00:04:16,850
+I can just go to Operator hub,
+
+112
+00:04:16,850 --> 00:04:19,460
+click on Advanced cluster
+management kubernetes
+
+113
+00:04:19,460 --> 00:04:20,795
+and install this operator.
+
+114
+00:04:20,795 --> 00:04:22,685
+So I'm gonna go ahead
+and install this.
+
+115
+00:04:22,685 --> 00:04:25,745
+And this will take about two
+to three minutes install.
+
+116
+00:04:25,745 --> 00:04:28,640
+Once it's installed,
+then it'll become
+
+117
+00:04:28,640 --> 00:04:30,260
+a hub cluster that can be
+
+118
+00:04:30,260 --> 00:04:32,780
+used to deploy
+additional clusters.
+
+119
+00:04:32,780 --> 00:04:34,460
+For the sake of the demo,
+
+120
+00:04:34,460 --> 00:04:40,550
+let me go ahead and
+just go into ACM. Here.
+
+121
+00:04:40,550 --> 00:04:43,115
+We'll get back and oh, sorry,
+it's actually over here.
+
+122
+00:04:43,115 --> 00:04:45,770
+Let me go back to
+ACM. If I go to ACM,
+
+123
+00:04:45,770 --> 00:04:47,150
+you'll notice that when you come
+
+124
+00:04:47,150 --> 00:04:49,070
+in you get the dashboard view.
+
+125
+00:04:49,070 --> 00:04:51,245
+So this is advanced
+cluster management.
+
+126
+00:04:51,245 --> 00:04:53,030
+I'm going to go to
+the clusters menu
+
+127
+00:04:53,030 --> 00:04:54,425
+on the left-hand side here.
+
+128
+00:04:54,425 --> 00:04:55,880
+And I can actually create
+
+129
+00:04:55,880 --> 00:04:57,230
+a new cluster a
+straight from here.
+
+130
+00:04:57,230 --> 00:05:00,495
+So once I have UPI
+deployed by UPI,
+
+131
+00:05:00,495 --> 00:05:01,835
+made that a hub cluster,
+
+132
+00:05:01,835 --> 00:05:03,455
+I go into Advanced
+cluster management.
+
+133
+00:05:03,455 --> 00:05:05,990
+I can begin creating
+clusters straight from here.
+
+134
+00:05:05,990 --> 00:05:07,760
+So I'll go ahead and
+hit Create cluster.
+
+135
+00:05:07,760 --> 00:05:10,355
+In this case, I'm going
+to use VMware vSphere.
+
+136
+00:05:10,355 --> 00:05:11,810
+Let's go ahead and select
+
+137
+00:05:11,810 --> 00:05:14,510
+the vSphere
+infrastructure provider.
+
+138
+00:05:14,510 --> 00:05:17,120
+We'll call this Boston.
+
+139
+00:05:17,120 --> 00:05:19,850
+I wanted to, I could add
+this to a cluster set.
+
+140
+00:05:19,850 --> 00:05:21,860
+I'm going to clusters
+that's basically just a
+
+141
+00:05:21,860 --> 00:05:24,575
+grouping for management
+purposes and ACM,
+
+142
+00:05:24,575 --> 00:05:26,645
+I'm going to select
+the latest release.
+
+143
+00:05:26,645 --> 00:05:29,180
+I'm not going to do single
+node OpenShift today.
+
+144
+00:05:29,180 --> 00:05:30,770
+Under node pools, I can,
+
+145
+00:05:30,770 --> 00:05:33,830
+I can customize the sizes
+
+146
+00:05:33,830 --> 00:05:36,350
+and the accounts of my
+control of my worker.
+
+147
+00:05:36,350 --> 00:05:37,850
+Nodes as well as
+
+148
+00:05:37,850 --> 00:05:41,000
+their memory and CPU core
+sockets, all that stuff.
+
+149
+00:05:41,000 --> 00:05:43,910
+I'm going to leave those
+as is for the networks.
+
+150
+00:05:43,910 --> 00:05:44,810
+Again, you do need to
+
+151
+00:05:44,810 --> 00:05:46,070
+understand what these
+are going to be.
+
+152
+00:05:46,070 --> 00:05:47,870
+So in this case, we're going to
+
+153
+00:05:47,870 --> 00:05:50,525
+need a public network
+on the sphere.
+
+154
+00:05:50,525 --> 00:05:54,560
+So I'll go ahead and
+add that in there.
+
+155
+00:05:54,560 --> 00:05:56,585
+You need the API that,
+
+156
+00:05:56,585 --> 00:05:59,060
+that's the virtual IP address
+
+157
+00:05:59,060 --> 00:06:00,800
+that the culture will
+communicate over.
+
+158
+00:06:00,800 --> 00:06:03,935
+And that's the Ingrid's virtual
+IP address for traffic.
+
+159
+00:06:03,935 --> 00:06:06,095
+I'm not going to use a proxy.
+
+160
+00:06:06,095 --> 00:06:07,820
+If I wanted to, I could extend
+
+161
+00:06:07,820 --> 00:06:11,630
+this installation with
+ansible templates.
+
+162
+00:06:11,630 --> 00:06:13,430
+So if there's
+something outside of
+
+163
+00:06:13,430 --> 00:06:16,100
+the installer, outside of IPI,
+
+164
+00:06:16,100 --> 00:06:17,540
+the installer provision
+infrastructure
+
+165
+00:06:17,540 --> 00:06:18,830
+flow that I want to do,
+
+166
+00:06:18,830 --> 00:06:20,180
+update a CMDB, send
+
+167
+00:06:20,180 --> 00:06:22,610
+an e-mail integrated service,
+now something of that sort.
+
+168
+00:06:22,610 --> 00:06:24,890
+I could use Ansible to do that.
+
+169
+00:06:24,890 --> 00:06:28,865
+And then I can simply review
+this and then hit Create.
+
+170
+00:06:28,865 --> 00:06:30,380
+Before I hit Create,
+I just want to point
+
+171
+00:06:30,380 --> 00:06:31,430
+out all of this is
+
+172
+00:06:31,430 --> 00:06:33,620
+actually see this all
+
+173
+00:06:33,620 --> 00:06:35,300
+in YAML as well, read
+on the right hand side.
+
+174
+00:06:35,300 --> 00:06:36,740
+So if you wanted
+to kinda copy and
+
+175
+00:06:36,740 --> 00:06:38,975
+paste and reproduce
+these configurations,
+
+176
+00:06:38,975 --> 00:06:41,120
+you could do so
+relatively easily,
+
+177
+00:06:41,120 --> 00:06:42,770
+so that I'll hit Create.
+
+178
+00:06:42,770 --> 00:06:46,430
+And this should kick off and
+begin deploying our cluster.
+
+179
+00:06:46,430 --> 00:06:48,395
+So you've got the view here.
+
+180
+00:06:48,395 --> 00:06:51,500
+But hopefully that gives you
+a good idea of how you can
+
+181
+00:06:51,500 --> 00:06:55,235
+deploy clusters
+using UPI, an API.
+
+182
+00:06:55,235 --> 00:06:56,870
+Now I'm going to hand
+it over to Chuck,
+
+183
+00:06:56,870 --> 00:07:00,515
+who's going to walk you
+through the deployment of
+
+184
+00:07:00,515 --> 00:07:03,920
+an actual Red Hat
+OpenShift service
+
+185
+00:07:03,920 --> 00:07:06,240
+on Amazon Web Services.
